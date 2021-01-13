@@ -24,10 +24,10 @@ public class HelloRestController {
 
     // curl localhost:8080/hello/query?name=Manali -w "\n"
     // curl -X GET "http://localhost:8080/hello/query/?fName=Manali&lName=Parab" -w "\n"
-    // @RequestMapping(value = {"/query"}, method = RequestMethod.GET)
-    // public String sayHello(@RequestParam(value = "fName") String fName, @RequestParam(value = "lName") String lName) {
-    //     return "Hello " + fName + " " + lName + " !";
-    // }
+    @RequestMapping(value = {"/query"}, method = RequestMethod.GET)
+    public String sayHello(@RequestParam(value = "fName") String fName, @RequestParam(value = "lName") String lName) {
+        return "Hello " + fName + " " + lName + " !";
+    }
 
     // curl -X GET "http://localhost:8080/hello/param/Manali" -w "\n"
     @GetMapping("/param/{name}" )
@@ -35,9 +35,7 @@ public class HelloRestController {
         return "Hello "  + name + "!";
     }
 
-    //curl -X POST -H "Content-Type: application/json"
-    // -d '{"firstName": 'Lisa', "lastName": "Harry"}'
-    //http://localhost:8080/hello/post" -w "\n"
+    //curl -X POST -H "Content-Type: application/json" -d '{"firstName": 'Lisa', "lastName": "Harry"}' http://localhost:8080/hello/post" -w "\n"
     @PostMapping("/post")
     public String sayHello(@RequestBody User user) {
         return "Hello " + user.getFirstName() + " " + user.getLastName() + '!';
@@ -45,7 +43,7 @@ public class HelloRestController {
 
     //curl -X PUT localhost:8080/hello/put/Lisa/?lastName=Terrisa -w "\n"
     @PutMapping("/put/{firstName}")
-    public String sayHello(@PathVariable String firstName, @RequestParam(value = "lastName") String lastName) {
+    public String sayHelloPathParam(@PathVariable String firstName, @RequestParam(value = "lastName") String lastName) {
         return "Hello " + firstName + " " + lastName + '!';
     }
 
