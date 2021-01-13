@@ -5,6 +5,7 @@ import com.example.demo.model.User;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,10 +24,10 @@ public class HelloRestController {
 
     // curl localhost:8080/hello/query?name=Manali -w "\n"
     // curl -X GET "http://localhost:8080/hello/query/?fName=Manali&lName=Parab" -w "\n"
-    @RequestMapping(value = {"/query"}, method = RequestMethod.GET)
-    public String sayHello(@RequestParam(value = "fName") String fName, @RequestParam(value = "lName") String lName) {
-        return "Hello " + fName + " " + lName + " !";
-    }
+    // @RequestMapping(value = {"/query"}, method = RequestMethod.GET)
+    // public String sayHello(@RequestParam(value = "fName") String fName, @RequestParam(value = "lName") String lName) {
+    //     return "Hello " + fName + " " + lName + " !";
+    // }
 
     // curl -X GET "http://localhost:8080/hello/param/Manali" -w "\n"
     @GetMapping("/param/{name}" )
@@ -41,6 +42,14 @@ public class HelloRestController {
     public String sayHello(@RequestBody User user) {
         return "Hello " + user.getFirstName() + " " + user.getLastName() + '!';
     }
+
+    //curl -X PUT localhost:8080/hello/put/Lisa/?lastName=Terrisa -w "\n"
+    @PutMapping("/put/{firstName}")
+    public String sayHello(@PathVariable String firstName, @RequestParam(value = "lastName") String lastName) {
+        return "Hello " + firstName + " " + lastName + '!';
+    }
+
+
 
 
 
